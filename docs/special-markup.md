@@ -57,10 +57,10 @@ This is an introductory group. Place regular list items in a separate `ion-item-
 
 ## Tab accessory mini-player
 
-Use the same `ion-toolbar.ios-theme-tab-accessory` markup as `@rdlabo/ionic-theme-ios27`. This theme styles the Material capsule above `ion-tab-bar`. Place the toolbar in a fixed footer region above the tab bar (not inside `ion-content`). `.md3-disabled` opts an individual toolbar out.
+Add `.tab-accessory` to an `ion-toolbar` above `ion-tab-bar` (not inside `ion-content`). This theme styles the Material capsule. The same markup works with `@rdlabo/ionic-theme-ios27` (`ios-theme-tab-accessory` is kept as an alias). `.md3-disabled` opts an individual toolbar out. Call `enableTabAccessory()` once from this package for swipe-up; do not also call the ios27 copy.
 
 ```html preview
-<ion-toolbar class="ios-theme-tab-accessory">
+<ion-toolbar class="tab-accessory">
   <ion-thumbnail slot="start">
     <img data-tab-accessory="artwork" src="cover.jpg" alt="" />
   </ion-thumbnail>

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   IonButton,
   IonButtons,
@@ -16,10 +16,14 @@ import {
   IonTabs,
   IonThumbnail,
   IonToolbar,
+  ViewDidEnter,
+  ViewDidLeave,
 } from '@demo/ionic';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { enableTabAccessory, type TabAccessoryHandle } from '../../../../src';
 
 @Component({
   selector: 'app-tabs',
@@ -44,10 +48,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     IonProgressBar,
   ],
 })
-export class TabsPage implements OnInit {
+export class TabsPage implements OnInit, OnDestroy, ViewDidEnter, ViewDidLeave {
   readonly #router = inject(Router);
   readonly #el = inject(ElementRef);
   readonly #destroyRef = inject(DestroyRef);
+  #accessory?: TabAccessoryHandle;
   playing = true;
   showAccessory = false;
   accessoryActivated = false;
@@ -74,6 +79,10 @@ export class TabsPage implements OnInit {
       });
   }
 
+  ngOnDestroy() {
+    this.ionViewDidLeave();
+  }
+
   togglePlay(event: Event) {
     event.stopPropagation();
     this.playing = !this.playing;
@@ -81,5 +90,14 @@ export class TabsPage implements OnInit {
 
   onAccessoryActivate() {
     this.accessoryActivated = true;
+  }
+
+  ionViewDidEnter() {
+    this.#accessory = enableTabAccessory();
+  }
+
+  ionViewDidLeave() {
+    this.#accessory?.destroy();
+    this.#accessory = undefined;
   }
 }

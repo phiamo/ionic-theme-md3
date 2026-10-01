@@ -1,6 +1,6 @@
-// Same markup as @rdlabo/ionic-theme-ios27: ion-toolbar.ios-theme-tab-accessory
-// (thumb, title, subtitle, play, progress). MD3 styles the web capsule; iOS 26+
-// can project the same toolbar as UITabAccessory.
+// Shared opt-in: ion-toolbar.tab-accessory (same pattern as item-group-header).
+// ios-theme-tab-accessory remains an alias for dual-theme markup.
+ion-toolbar.md.tab-accessory:not(.md3-disabled),
 ion-toolbar.md.ios-theme-tab-accessory:not(.md3-disabled) {
   --md3-tab-accessory-radius: 16px;
   --md3-tab-accessory-height: 64px;
@@ -244,6 +244,7 @@ html.md .accessory-slide-clip {
     display: none;
   }
 
+  ion-toolbar.md.tab-accessory:not(.md3-disabled),
   ion-toolbar.md.ios-theme-tab-accessory:not(.md3-disabled) {
     position: relative;
     left: auto;
